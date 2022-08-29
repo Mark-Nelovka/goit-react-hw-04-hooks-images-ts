@@ -1,0 +1,14 @@
+.containerBtn {
+  margin: 0 auto;
+}
+
+.item {
+  margin-left: 15px;
+  margin-top: 10px;
+  flex-basis: calc(100% / 5);
+}
+
+.containerDontCorrectly {
+  margin: 0 auto;
+  text-align: center;
+}
