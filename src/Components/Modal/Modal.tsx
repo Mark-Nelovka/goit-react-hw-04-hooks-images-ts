@@ -1,15 +1,22 @@
 import s from "./Modal.module.css";
-import PropTypes from "prop-types";
 import { createPortal } from "react-dom";
-import { useState, useEffect } from "react";
-const modalRoot = document.querySelector("#modal-root");
+import React, { useState, useEffect } from "react";
+import { modalProps } from "../../Interfaces/interfaces";
+const modalRoot = document.querySelector("#modal-root") as HTMLElement;
 
-export default function Modal({ onClose, image, id }) {
-  const [link, setlink] = useState({});
+export default function Modal({ onClose, image, id }: modalProps) {
+  const [link, setlink] = useState({
+    id: 0,
+  largeImageURL: '',
+  tags: ''
+  });
 
   useEffect(() => {
     const link = image.find((value) => value.id === id);
-    setlink(link);
+    if (link) {
+       setlink(link);
+    }
+   
 
     window.addEventListener("keydown", handleModal);
     return () => {
@@ -17,13 +24,13 @@ export default function Modal({ onClose, image, id }) {
     };
   }, [id]);
 
-  const handleModal = (e) => {
+  const handleModal = (e: KeyboardEvent) => {
     if (e.code === "Escape") {
       onClose();
     }
   };
 
-  const handleBackdropClick = (e) => {
+  const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.currentTarget === e.target) {
       onClose();
     }
@@ -36,7 +43,3 @@ export default function Modal({ onClose, image, id }) {
     modalRoot
   );
 }
-
-Modal.proptTypes = {
-  link: PropTypes.object,
-};

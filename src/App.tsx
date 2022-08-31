@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import s from "./App.module.css";
-import PropTypes from "prop-types";
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Searchbar from "./Components/Searchbar/Searchbar";
 import fetchApi from "./Components/serviseApi.js/fecthApi";
@@ -9,10 +8,15 @@ import Modal from "./Components/Modal/Modal";
 import imgNotCorrectly from "../src/images/Упс.jpeg";
 import { ThreeDots } from "react-loader-spinner";
 import ImageGalleryItem from "./Components/ImageGalleryItem/ImageGalleryItem";
+import {searchNameForModal} from './Interfaces/interfaces';
 
 function App() {
   const [imgName, setimgName] = useState("");
-  const [imageName, setImageName] = useState(null);
+  const [imageName, setImageName] = useState({
+    id: 0,
+    webformatURL: '',
+  tags: ''
+  });
   const [name, setName] = useState("");
   const [page, setPage] = useState(1);
   const [status, setStatus] = useState("idle");
@@ -39,7 +43,7 @@ function App() {
             setStatus("resolved");
             return;
           }
-          setImageName((prevState) => [...prevState, ...res]);
+          setImageName((prevState: searchNameForModal) => [prevState, ...res]);
           setStatus("resolved");
         })
         .catch((error) => {
@@ -57,11 +61,11 @@ function App() {
     setShowModalState(!showModalState);
   };
 
-  const handleFormSubmit = (painting) => {
+  const handleFormSubmit = (painting: string) => {
     setimgName(painting);
   };
 
-  const showModalFunc = (id) => {
+  const showModalFunc = (id: number) => {
     setShowModalState(!showModalState);
     setidImage(id);
   };
@@ -104,7 +108,3 @@ function App() {
 }
 
 export default App;
-
-App.propTypes = {
-  imageName: PropTypes.string,
-};

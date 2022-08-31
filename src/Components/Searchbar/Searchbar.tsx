@@ -1,15 +1,15 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import s from "./Searchbar.module.css";
-export default function Searchbar({ valueSubmit }) {
+import { searchBarProps } from "../../Interfaces/interfaces";
+export default function Searchbar({ valueSubmit }: searchBarProps) {
   const [input, setinput] = useState("");
 
-  const handleInputChange = (e) => {
-    const saveInputValue = e.currentTarget.value;
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const saveInputValue = event.currentTarget.value;
     setinput(saveInputValue);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     valueSubmit(input);
     setinput("");
@@ -37,7 +37,3 @@ export default function Searchbar({ valueSubmit }) {
     </>
   );
 }
-
-Searchbar.proptTypes = {
-  input: PropTypes.string,
-};

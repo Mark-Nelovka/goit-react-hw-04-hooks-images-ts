@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import s from "./ImageGalleryItem.module.css";
 import ItemsCard from "../ImageGallery/ImageGallery";
 import { FetchItemsProps } from "../../Interfaces/interfaces";
@@ -31,10 +30,3 @@ export default function FetchItems({ searchName, modal }: FetchItemsProps) {
     </>
   );
 }
-
-FetchItems.propTypes = {
-  name: PropTypes.string,
-  page: PropTypes.number,
-  status: PropTypes.string,
-  showModal: PropTypes.bool,
-};
