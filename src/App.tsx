@@ -47,6 +47,7 @@ function App() {
           setStatus("resolved");
         })
         .catch((error) => {
+          console.log(error)
           setStatus("rejected");
         });
     }
